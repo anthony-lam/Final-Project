@@ -1,8 +1,9 @@
-public interface Piece{
-  private color c;
-  private Location[] coordinates;
+/*public interface Piece{
+  public color c;
+  public Location[] coordinates;
   
   
   
   
 }
+*/

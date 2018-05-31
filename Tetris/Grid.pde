@@ -1,4 +1,4 @@
-public class Grid{
+/*public class Grid{
   private color[][] grid;
   private int score;
   public Grid(){
@@ -11,3 +11,4 @@ public class Grid{
     score = 0;
   }
 }
+*/
