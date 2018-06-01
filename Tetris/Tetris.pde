@@ -1,5 +1,5 @@
 Block[][] grid = new Block[10][24];
-ArrayList<Piece> falling = new ArrayList<>();
+ArrayList<Piece> falling = new ArrayList<Piece>();
 void setup(){
   size(300,720);
   for (int r =0; r<10; r++){
