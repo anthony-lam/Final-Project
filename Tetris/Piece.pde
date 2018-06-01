@@ -138,10 +138,12 @@ public class Piece{
  int [][][] ZPiece = {ZPiece1,ZPiece2,ZPiece3,ZPiece3};
  int [][][] BZPiece = {BZPiece1,BZPiece2,BZPiece3,BZPiece3};
  int [][][] TPiece = {TPiece1,TPiece2,TPiece3,TPiece4};
- int[][][][] Pieces;
- 
- public Piece(int n){
-   
+ int[][][][] Pieces = {LinePiece, LPiece, BLPiece, SquarePiece, ZPiece, BZPiece,TPiece};
+ int [][] current;
+ int rotation;
+ public Piece(){
+   rotation = (int)(Math.random()*4);
+   current = Pieces[(int)(Math.random()*7)][rotation];
  }
   
   
