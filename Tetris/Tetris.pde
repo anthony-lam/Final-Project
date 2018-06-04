@@ -17,8 +17,8 @@ void draw(){
     }
   }
 }
-void add(Piece p){
-  falling.add(p);
+void add(){
+  falling.add(new Piece());
 }
 void checkCollision(){
   for (Piece current: falling){
