@@ -142,11 +142,22 @@ public class Piece {
   int [][] current;
   int rotation;
   int type;
+  Block[] blocks;
 
   public Piece() {
     rotation = (int)(Math.random()*4);
     type = (int)(Math.random()*7);
     current = Pieces[type][rotation];
+    blocks = new Block[4];
+    int i = 0;
+    for (int r = 4; r < 8; r++) {
+      for (int c = 0; c < 4; c++) {
+        if (current[r-4][c] == 1) {
+          blocks[i] = grid[r][c];
+          blocks[i].c = color(0);
+        }
+      }
+    }
   }
 
   public void rotate(boolean left) {
@@ -158,9 +169,31 @@ public class Piece {
       current = Pieces[type][rotation];
     }
   }
-  
-  public int[][] getBottom(){
-    
+
+  public int[][] getBottom() {
+    int[][] bottoms = new int[4][2];
+    return bottoms;
   }
-   
+  
+  public void moveDown(){
+    for (Block block : blocks){
+      block.c = color(255);
+      grid[block.x][block.y - 1].c = color(0);
+    }
+  }
+  
+  public void moveLeft(){
+    for (Block block : blocks){
+      block.c = color(255);
+      grid[block.x - 1][block.y].c = color(0);
+    }
+  }
+  
+  
+  public void moveRight(){
+    for (Block block : blocks){
+      block.c = color(255);
+      grid[block.x + 1][block.y].c = color(0);
+    }
+  }
 }
