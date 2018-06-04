@@ -169,10 +169,13 @@ public class Piece {
       current = Pieces[type][rotation];
     }
   }
-
-  public int[][] getBottom() {
-    int[][] bottoms = new int[4][2];
-    return bottoms;
+  public boolean checkCollisons(){
+    for (int i=0;i<4;i++){
+      if (grid[blocks[i].x][blocks[i].y-1].c!=color(0)){
+        return true;
+      }
+    }
+    return false;
   }
   
   public void moveDown(){
