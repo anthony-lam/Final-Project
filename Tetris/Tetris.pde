@@ -9,6 +9,7 @@ void setup(){
   }
 }
 void draw(){
+  add();
   checkCollision();
   for (int r =0; r<24; r++){
     for (int c = 0; c<10; c++){
@@ -18,7 +19,9 @@ void draw(){
   }
 }
 void add(){
-  falling.add(new Piece());
+  if (falling.size()==0){
+    falling.add(new Piece());
+  }
 }
 void checkCollision(){
   for (Piece current: falling){
