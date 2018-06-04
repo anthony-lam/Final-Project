@@ -1,57 +1,71 @@
 Block[][] grid = new Block[24][10];
 ArrayList<Piece> falling = new ArrayList<Piece>();
-void setup(){
-  size(300,720);
-  for (int r =0; r<24; r++){
-    for (int c = 0; c<10; c++){
-      grid[r][c]= new Block(r,c,color(255));
+void setup() {
+  size(300, 720);
+  for (int r =0; r<24; r++) {
+    for (int c = 0; c<10; c++) {
+      grid[r][c]= new Block(r, c, color(255));
     }
   }
 }
-void draw(){
+void draw() {
   add();
   checkCollision();
-  for (int r =0; r<24; r++){
-    for (int c = 0; c<10; c++){
+
+  for (int r =0; r<24; r++) {
+    for (int c = 0; c<10; c++) {
       fill(grid[r][c].c);
       rect(c*30, r*30, c*30+30, r*30+30);
     }
   }
 }
-void add(){
-  if (falling.size()==0){
+void add() {
+  if (falling.size()==0) {
     falling.add(new Piece());
   }
 }
-void checkCollision(){
-  for (Piece current: falling){
+void checkCollision() {
+  for (Piece current : falling) {
     int[][] bottom = current.getBottom();
-    for (int i=0;i<bottom.length;i++){
-      if (grid[bottom[i][0]][bottom[i][1]].c != color(255) || bottom[i][0]>=24){
+    for (int i=0; i<bottom.length; i++) {
+      if (grid[bottom[i][0]][bottom[i][1]].c != color(255) || bottom[i][0]>=24) {
         falling.remove(current);
       }
     }
   }
 }
-void keyPressed(){
-  if (keyCode == RIGHT){
+void keyPressed() {
+  if (keyCode == RIGHT) {
     moveRight();
   }
-  if (keyCode == LEFT){
+  if (keyCode == LEFT) {
     moveLeft();
   }
+  if (key == 'a' ){
+    rotate(true); //left
+  }
+  if (key == 'd' ){
+    rotate(false); //right
+  }
 }
-void moveDown(){
-  for(Piece current:falling){
+void moveDown() {
+  for (Piece current : falling) {
     current.moveDown();
   }
 }
-void moveRight(){
-  for(Piece current:falling){
+void moveRight() {
+  for (Piece current : falling) {
     current.moveRight();
   }
-}void moveLeft(){
-  for(Piece current:falling){
+}
+void moveLeft() {
+  for (Piece current : falling) {
     current.moveLeft();
+  }
+}
+
+void rotate(boolean left){
+  for (Piece current : falling){
+   current.rotate(left); 
   }
 }
