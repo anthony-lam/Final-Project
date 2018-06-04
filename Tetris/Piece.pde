@@ -151,8 +151,8 @@ public class Piece {
     blocks = new Block[4];
     int i = 0;
     for (int r = 0; r < 4; r++) {
-      for (int c = 11; c < 14; c++) {
-        if (current[r][c - 11] == 1) {
+      for (int c = 3; c < 7; c++) {
+        if (current[r][c - 3] == 1) {
           blocks[i] = grid[r][c];
           blocks[i].c = color(0);
         }
