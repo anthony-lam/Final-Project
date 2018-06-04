@@ -150,9 +150,9 @@ public class Piece {
     current = Pieces[type][rotation];
     blocks = new Block[4];
     int i = 0;
-    for (int r = 4; r < 8; r++) {
-      for (int c = 0; c < 4; c++) {
-        if (current[r-4][c] == 1) {
+    for (int r = 0; r < 4; r++) {
+      for (int c = 3; c < 7; c++) {
+        if (current[r][c - 3] == 1) {
           blocks[i] = grid[r][c];
           blocks[i].c = color(0);
         }
