@@ -152,8 +152,8 @@ public class Piece {
     blocks = new Block[4];
     int i = 0;
     for (int r = 0; r < 4; r++) {
-      for (int c = 3; c < 7; c++) {
-        if (current[r][c - 3] == 1) {
+      for (int c = 0; c < 4; c++) {
+        if (current[r][c] == 1) {
           blocks[i] = new Block(r,c,colors[type]);
           i++;
         }
@@ -190,8 +190,10 @@ public class Piece {
   public void moveDown(){
     for (Block block : blocks){
       grid[block.y][block.x].c=color(255);
-      grid[block.y+1][block.x].c = block.c;  
+    }
+    for (Block block : blocks){
       block.y+=1;
+      grid[block.y][block.x].c=block.c;
     }
   }
   

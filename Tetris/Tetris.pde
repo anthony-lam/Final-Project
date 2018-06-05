@@ -1,3 +1,4 @@
+import java.util.*;
 Block[][] grid = new Block[24][10];
 ArrayList<Piece> falling = new ArrayList<Piece>();
 void setup() {
@@ -10,7 +11,6 @@ void setup() {
 }
 void draw() {
   if (frameCount%4==0){
-  clear();
   add();
   checkCollision();
   for (int r =0; r<24; r++) {
