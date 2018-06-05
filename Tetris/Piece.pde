@@ -154,10 +154,13 @@ public class Piece {
     for (int r = 0; r < 4; r++) {
       for (int c = 3; c < 7; c++) {
         if (current[r][c - 3] == 1) {
-          blocks[i] = grid[r][c];
-          blocks[i].c = colors[type];
+          blocks[i] = new Block(r,c,colors[type]);
+          i++;
         }
       }
+    }
+    for (int l =0; l<4; l++){
+      grid[blocks[l].x][blocks[l].y].c = blocks[l].c;
     }
   }
 
@@ -180,7 +183,7 @@ public class Piece {
       }
     }
     for(int i=0;i<10;i++){
-      if (cols[i]!=-1 && grid[i][cols[i]+1].c != color(0)){
+      if (cols[i]!=-1 && (cols[i]==23 || grid[cols[i]+1][i].c != color(255))){
         return true;
       }
     }
@@ -189,9 +192,9 @@ public class Piece {
   
   public void moveDown(){
     for (Block block : blocks){
-      grid[block.x][block.y].c=color(0);
+      grid[block.y][block.x].c=color(255);
       block.y+=1;
-      grid[block.x][block.y].c = block.c;
+      grid[block.y][block.x].c = block.c;
     }
   }
   

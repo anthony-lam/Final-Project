@@ -10,8 +10,9 @@ void setup() {
 }
 void draw() {
   add();
+  System.out.println("added");
   checkCollision();
-
+  moveDown();
   for (int r =0; r<24; r++) {
     for (int c = 0; c<10; c++) {
       fill(grid[r][c].c);
@@ -26,11 +27,9 @@ void add() {
 }
 
 void checkCollision() {
-  for (Piece current : falling) {
-    if (current.checkCollisions()){
-        falling.remove(current);
+    if (falling.get(0).checkCollisions()){
+        falling.remove(0);
     }
-  }
 }
 void keyPressed() {
   if (keyCode == RIGHT) {
