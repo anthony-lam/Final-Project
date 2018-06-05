@@ -74,7 +74,7 @@ void keyPressed() {
   if (keyCode == LEFT) {
     moveLeft();
   }
-  if (key == 'q' ) {
+  if (keyCode == UP ) {
     rotate(true); //left
   }
   if (key == 'e' ) {

@@ -124,6 +124,7 @@ public class Piece {
   int [][] current;
   int rotation;
   int type;
+  int[] corner = {0, 0};
   color[] colors = {color(255, 0, 0), color(0, 0, 255), color(255, 165, 0), color(255, 255, 0), color(0, 255, 0), color(255, 0, 255), color(0, 255, 255)};
   Block[] blocks;
 
@@ -144,24 +145,35 @@ public class Piece {
   }
 
   public void rotate(boolean left) {
-    if (left) {
-      rotation = (rotation + 3) % 4;
-      current = Pieces[type][rotation];
-    } else {
-      rotation = (rotation + 1) % 4;
-      current = Pieces[type][rotation];
+    if (canRotate()) {
+     // falling.remove(this);
+      if (left) {
+        rotation = (rotation + 3) % 4;
+        current = Pieces[type][rotation];
+      } else {
+        rotation = (rotation + 1) % 4;
+        current = Pieces[type][rotation];
+      }
+      int i = 0;
+      for (int r = 0; r < 4; r++) {
+        for (int c = 1; c < 4; c++) {
+          if (current[r][c] == 0) {
+            grid[r + corner[0]][c + corner[1]].c = color(255);
+          } else {
+            grid[r + corner[0]][c + corner[1]].c = colors[type];
+            blocks[i] = grid[r + corner[0]][c + corner[1]];
+            i++;
+          }
+        }
+      }
     }
   }
-  
-  
-  public boolean canRotateLeft() {
-    int r = (rotation + 3) % 4;
-    int[][] temp = Pieces[type][r];
-        
 
-    return true;
+
+  public boolean canRotate() {
+    return corner[0] >= 0 && corner[0] < 24 && corner[1] >= 0 && corner[1] < 10;
   }
-  
+
   public boolean checkCollisions() {
     int[] cols ={-1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
     for (int i=0; i<4; i++) {
@@ -187,6 +199,7 @@ public class Piece {
       block.y+=1;
       grid[block.y][block.x].c=block.c;
     }
+    corner[0] += 1;
   }
 
   public void moveLeft() {
@@ -198,6 +211,7 @@ public class Piece {
         block.x-=1;
         grid[block.y][block.x].c=block.c;
       }
+      corner[1] -= 1;
     }
   }
   public boolean canMoveLeft() {
@@ -260,7 +274,7 @@ public class Piece {
           grid[block.y][block.x].c=block.c;
         }
       }
+      corner[1] += 1;
     }
   }
-
 }
