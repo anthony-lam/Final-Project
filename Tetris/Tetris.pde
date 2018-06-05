@@ -24,13 +24,11 @@ void add() {
     falling.add(new Piece());
   }
 }
+
 void checkCollision() {
   for (Piece current : falling) {
-    int[][] bottom = current.getBottom();
-    for (int i=0; i<bottom.length; i++) {
-      if (grid[bottom[i][0]][bottom[i][1]].c != color(255) || bottom[i][0]>=24) {
+    if (current.checkCollisions()){
         falling.remove(current);
-      }
     }
   }
 }

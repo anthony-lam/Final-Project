@@ -142,6 +142,7 @@ public class Piece {
   int [][] current;
   int rotation;
   int type;
+  color[] colors = {color(255,0,0),color(0,0,255),color(255,165,0),color(255,255,0),color(0,255,0),  color(255,0,255),color(0,255,255)};
   Block[] blocks;
 
   public Piece() {
@@ -154,7 +155,7 @@ public class Piece {
       for (int c = 3; c < 7; c++) {
         if (current[r][c - 3] == 1) {
           blocks[i] = grid[r][c];
-          blocks[i].c = color(0);
+          blocks[i].c = colors[type];
         }
       }
     }
@@ -169,9 +170,17 @@ public class Piece {
       current = Pieces[type][rotation];
     }
   }
-  public boolean checkCollisons(){
+  public boolean checkCollisions(){
+    int[] cols ={-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
     for (int i=0;i<4;i++){
-      if (grid[blocks[i].x][blocks[i].y-1].c!=color(0)){
+      int x =blocks[i].x;
+      int y =blocks[i].y;
+      if (y>cols[x]){
+        cols[x]=y;
+      }
+    }
+    for(int i=0;i<10;i++){
+      if (cols[i]!=-1 && grid[i][cols[i]+1].c != color(0)){
         return true;
       }
     }
@@ -180,8 +189,9 @@ public class Piece {
   
   public void moveDown(){
     for (Block block : blocks){
-      block.c = color(255);
-      grid[block.x][block.y - 1].c = color(0);
+      grid[block.x][block.y].c=color(0);
+      block.y+=1;
+      grid[block.x][block.y].c = block.c;
     }
   }
   
