@@ -134,9 +134,9 @@ public class Piece {
     current = Pieces[type][rotation];
     blocks = new Block[4];
     int i = 0;
-    for (int r = 1; r < 5; r++) {
+    for (int r = 0; r < 4; r++) {
       for (int c = 1; c < 5; c++) {
-        if (current[r-1][c-1] == 1) {
+        if (current[r][c - 1] == 1) {
           blocks[i] = new Block(r, c, colors[type]);
           i++;
         }
@@ -180,8 +180,8 @@ public class Piece {
       int x =blocks[i].x;
    //   println(x);
       int y =blocks[i].y;
-      if (y>cols[x]) {
-        cols[x]=y;
+      if (x>cols[y]) {
+        cols[y]=x;
       }
     }
     for (int i=0; i<10; i++) {
@@ -194,11 +194,11 @@ public class Piece {
 
   public void moveDown() {
     for (Block block : blocks) {
-      grid[block.y][block.x].c=color(255);
+      grid[block.x][block.y].c=color(255);
     }
     for (Block block : blocks) {
-      block.y+=1;
-      grid[block.y][block.x].c=block.c;
+      block.x+=1;
+      grid[block.x][block.y].c=block.c;
     }
     corner[0] += 1;
   }
@@ -206,18 +206,18 @@ public class Piece {
   public void moveLeft() {
     if (canMoveLeft()) {
       for (Block block : blocks) {
-        grid[block.y][block.x].c=color(255);
+        grid[block.x][block.y].c=color(255);
       }
       for (Block block : blocks) {
-        block.x-=1;
-        grid[block.y][block.x].c=block.c;
+        block.y-=1;
+        grid[block.x][block.y].c=block.c;
       }
       corner[1] -= 1;
     }
   }
   public boolean canMoveLeft() {
     for (Block block : blocks) {
-      if (block.x<=0) {
+      if (block.y<=0) {
         return false;
       }
     }
@@ -228,8 +228,8 @@ public class Piece {
     for (int i=0; i<4; i++) {
       int x =blocks[i].x;
       int y =blocks[i].y;
-      if (x<rows[y]) {
-        rows[y]=x;
+      if (y<rows[x]) {
+        rows[x]=y;
       }
     }
     for (int i=0; i<24; i++) {
@@ -242,7 +242,7 @@ public class Piece {
 
   public boolean canMoveRight() {
     for (Block block : blocks) {
-      if (block.x>8) {
+      if (block.y>8) {
         return false;
       }
     }
@@ -253,8 +253,8 @@ public class Piece {
     for (int i=0; i<4; i++) {
       int x =blocks[i].x;
       int y =blocks[i].y;
-      if (x>rows[y]) {
-        rows[y]=x;
+      if (y>rows[x]) {
+        rows[x]=y;
       }
     }
     for (int i=0; i<24; i++) {
@@ -267,12 +267,12 @@ public class Piece {
   public void moveRight() {
     if (canMoveRight()) {
       for (Block block : blocks) {
-        grid[block.y][block.x].c=color(255);
+        grid[block.x][block.y].c=color(255);
       }
       for (Block block : blocks) {
-        if (block.x<9) {
-          block.x+=1;
-          grid[block.y][block.x].c=block.c;
+        if (block.y<9) {
+          block.y+=1;
+          grid[block.x][block.y].c=block.c;
         }
       }
       corner[1] += 1;

@@ -7,8 +7,6 @@ void setup() {
   for (int r =0; r<24; r++) {
     for (int c = 0; c<10; c++) {
       grid[r][c]= new Block(r, c, color(255));
-      println(grid[r][c].x);
-      println(grid[r][c].y);
     }
   }
 }
