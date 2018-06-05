@@ -157,7 +157,7 @@ public class Piece {
   public boolean canRotateLeft() {
     int r = (rotation + 3) % 4;
     int[][] temp = Pieces[type][r];
-    
+        
 
     return true;
   }
