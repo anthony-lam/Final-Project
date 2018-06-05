@@ -124,7 +124,7 @@ public class Piece {
   int [][] current;
   int rotation;
   int type;
-  int[] corner = {0, 0};
+  int[] corner = {1, 1};
   color[] colors = {color(255, 0, 0), color(0, 0, 255), color(255, 165, 0), color(255, 255, 0), color(0, 255, 0), color(255, 0, 255), color(0, 255, 255)};
   Block[] blocks;
 
@@ -134,9 +134,9 @@ public class Piece {
     current = Pieces[type][rotation];
     blocks = new Block[4];
     int i = 0;
-    for (int r = 0; r < 4; r++) {
-      for (int c = 0; c < 4; c++) {
-        if (current[r][c] == 1) {
+    for (int r = 1; r < 5; r++) {
+      for (int c = 1; c < 5; c++) {
+        if (current[r-1][c-1] == 1) {
           blocks[i] = new Block(r, c, colors[type]);
           i++;
         }
@@ -178,6 +178,7 @@ public class Piece {
     int[] cols ={-1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
     for (int i=0; i<4; i++) {
       int x =blocks[i].x;
+   //   println(x);
       int y =blocks[i].y;
       if (y>cols[x]) {
         cols[x]=y;
