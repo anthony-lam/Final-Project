@@ -170,6 +170,16 @@ public class Piece {
       current = Pieces[type][rotation];
     }
   }
+  
+  
+  public boolean canRotateLeft() {
+    int r = (rotation + 3) % 4;
+    int[][] temp = Pieces[type][r];
+    
+
+    return true;
+  }
+  
   public boolean checkCollisions() {
     int[] cols ={-1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
     for (int i=0; i<4; i++) {
@@ -270,4 +280,5 @@ public class Piece {
       }
     }
   }
+
 }

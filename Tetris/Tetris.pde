@@ -43,10 +43,10 @@ void keyPressed() {
   if (keyCode == LEFT) {
     moveLeft();
   }
-  if (key == 'a' ){
+  if (key == 'q' ){
     rotate(true); //left
   }
-  if (key == 'd' ){
+  if (key == 'e' ){
     rotate(false); //right
   }
 }
