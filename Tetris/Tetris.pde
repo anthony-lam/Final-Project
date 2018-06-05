@@ -1,7 +1,6 @@
 import java.util.*;
 Block[][] grid = new Block[24][10];
 ArrayList<Piece> falling = new ArrayList<Piece>();
-ArrayList<Block> onBoard = new ArrayList<Block>();
 void setup() {
   size(300, 720);
   for (int r =0; r<24; r++) {
@@ -31,9 +30,6 @@ void add() {
 
 void checkCollision() {
   if (falling.get(0).checkCollisions()) {
-    for (Block b : falling.get(0).blocks) {
-      onBoard.add(b);
-    }
     falling.remove(0);
   } else {
     falling.get(0).moveDown();
@@ -42,28 +38,26 @@ void checkCollision() {
 
 
 void checkFullRow() {
-  for (int r = grid.length - 1; r > -1; r--) {
+  for (int r = 23; r > -1; r--) {
     boolean full = true;
     for (int c = 0; c < grid[0].length; c++) {
-      if (grid[r][c].c == color(255)){
+      if (grid[r][c].c == color(255)) {
         full = false;
         c = grid[0].length; //**im not sure if break is allowed
       }
     }
-    if (full){
-      for (Block b : grid[r]){
-       b.c = color(255); 
+    if (full) {
+      for (Block b : grid[r]) {
+        b.c = color(255);
       }
-      
-      for (Block b : onBoard){
-        if (b.x < r){
-      //   println(b.x);
-         grid[b.x+1][b.y].c = b.c;
-         b.c = color(255);
+
+      for (int i = r - 1; i > 0; i--) {
+        for (Block b : grid[i]) {
+          grid[b.x+1][b.y].c = b.c;
+          b.c = color(255);
         }
       }
     }
-    
   }
 }
 
@@ -74,7 +68,7 @@ void keyPressed() {
   if (keyCode == LEFT) {
     moveLeft();
   }
-  if (keyCode == UP ) {
+  if (key == 'q' ) {
     rotate(true); //left
   }
   if (key == 'e' ) {

@@ -162,7 +162,7 @@ public class Piece {
           if (current[r][c] == 0) {
             grid[r + x][c + y].c = color(255);
           } else {
-            blocks[i] = grid[r + x][c + y];
+            blocks[i] = new Block(r + x, c + y, colors[type]);
             i += 1;
             grid[r + x][c + y].c = colors[type];
           }
@@ -174,7 +174,7 @@ public class Piece {
 
 
   public boolean canRotate(boolean left) {
-    boolean ok = corner[0] >= 0 && corner[0] < 24 && corner[1] >= 0 && corner[1] < 10;
+    boolean ok = corner[0] >= 0 && corner[0] + 4 < 24 && corner[1] >= 0 && corner[1] + 4  < 10;
     if (!ok) {
       return false;
     }
@@ -187,9 +187,9 @@ public class Piece {
     int[][] temp = Pieces[type][newR];
     for (int r = 0; r < 4; r++) {
       for (int c = 0; c < 4; c++) {
-        if (temp[r][c] == 1 && grid[r + corner[0]][c + corner[1]].c != color(255)) {
-          println(r);
-          println(c);
+        if (temp[r][c] == 1 && current[r][c] != 1 && grid[r + corner[0]][c + corner[1]].c != color(255)) {
+   //       println(r);
+   //       println(c);
           return false;
         }
       }
