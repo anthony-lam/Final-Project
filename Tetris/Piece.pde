@@ -142,7 +142,7 @@ public class Piece {
   int [][] current;
   int rotation;
   int type;
-  color[] colors = {color(255,0,0),color(0,0,255),color(255,165,0),color(255,255,0),color(0,255,0),  color(255,0,255),color(0,255,255)};
+  color[] colors = {color(255, 0, 0), color(0, 0, 255), color(255, 165, 0), color(255, 255, 0), color(0, 255, 0), color(255, 0, 255), color(0, 255, 255)};
   Block[] blocks;
 
   public Piece() {
@@ -154,7 +154,7 @@ public class Piece {
     for (int r = 0; r < 4; r++) {
       for (int c = 0; c < 4; c++) {
         if (current[r][c] == 1) {
-          blocks[i] = new Block(r,c,colors[type]);
+          blocks[i] = new Block(r, c, colors[type]);
           i++;
         }
       }
@@ -170,72 +170,104 @@ public class Piece {
       current = Pieces[type][rotation];
     }
   }
-  public boolean checkCollisions(){
-    int[] cols ={-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
-    for (int i=0;i<4;i++){
+  public boolean checkCollisions() {
+    int[] cols ={-1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+    for (int i=0; i<4; i++) {
       int x =blocks[i].x;
       int y =blocks[i].y;
-      if (y>cols[x]){
+      if (y>cols[x]) {
         cols[x]=y;
       }
     }
-    for(int i=0;i<10;i++){
-      if (cols[i]!=-1 && (cols[i]==23 || grid[cols[i]+1][i].c != color(255))){
+    for (int i=0; i<10; i++) {
+      if (cols[i]!=-1 && (cols[i]==23 || grid[cols[i]+1][i].c != color(255))) {
         return true;
       }
     }
     return false;
   }
-  
-  public void moveDown(){
-    for (Block block : blocks){
+
+  public void moveDown() {
+    for (Block block : blocks) {
       grid[block.y][block.x].c=color(255);
     }
-    for (Block block : blocks){
+    for (Block block : blocks) {
       block.y+=1;
       grid[block.y][block.x].c=block.c;
     }
   }
-  
-  public void moveLeft(){
-    if (canMoveLeft()){
-    for (Block block : blocks){
-      grid[block.y][block.x].c=color(255);
-    }
-    for (Block block : blocks){
-      block.x-=1;
-      grid[block.y][block.x].c=block.c;
-    }
+
+  public void moveLeft() {
+    if (canMoveLeft()) {
+      for (Block block : blocks) {
+        grid[block.y][block.x].c=color(255);
+      }
+      for (Block block : blocks) {
+        block.x-=1;
+        grid[block.y][block.x].c=block.c;
+      }
     }
   }
-  public boolean canMoveLeft(){
-    for (Block block:blocks){
-      if (block.x<=0){
+  public boolean canMoveLeft() {
+    for (Block block : blocks) {
+      if (block.x<=0) {
+        return false;
+      }
+    }
+    int[] rows =new int[24];
+    for (int i =0; i<24; i++) {
+      rows[i]=100;
+    }
+    for (int i=0; i<4; i++) {
+      int x =blocks[i].x;
+      int y =blocks[i].y;
+      if (x<rows[y]) {
+        rows[y]=x;
+      }
+    }
+    for (int i=0; i<24; i++) {
+      if (rows[i]!=100 && (grid[i][rows[i]-1].c != color(255))) {
         return false;
       }
     }
     return true;
   }
-        
-  public boolean canMoveRight(){
-    for (Block block:blocks){
-      if (block.x>=9){
+
+  public boolean canMoveRight() {
+    for (Block block : blocks) {
+      if (block.x>8) {
+        return false;
+      }
+    }
+    int[] rows =new int[24];
+    for (int i =0; i<24; i++) {
+      rows[i]=-1;
+    }
+    for (int i=0; i<4; i++) {
+      int x =blocks[i].x;
+      int y =blocks[i].y;
+      if (x>rows[y]) {
+        rows[y]=x;
+      }
+    }
+    for (int i=0; i<24; i++) {
+      if (rows[i]!=-1 && (grid[i][rows[i]+1].c != color(255))) {
         return false;
       }
     }
     return true;
   }
-  public void moveRight(){
-    if (canMoveRight()){
-    for (Block block : blocks){
-      grid[block.y][block.x].c=color(255);
-    }
-    for (Block block : blocks){
-      if (block.x<9){
-      block.x+=1;
-      grid[block.y][block.x].c=block.c;
+  public void moveRight() {
+    if (canMoveRight()) {
+      for (Block block : blocks) {
+        grid[block.y][block.x].c=color(255);
       }
-    }
+      for (Block block : blocks) {
+        if (block.x<9) {
+          block.x+=1;
+          grid[block.y][block.x].c=block.c;
+        }
+      }
     }
   }
 }

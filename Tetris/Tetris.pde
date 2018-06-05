@@ -10,7 +10,7 @@ void setup() {
   }
 }
 void draw() {
-  if (frameCount%4==0){
+  if (frameCount%10==0){
   add();
   checkCollision();
   for (int r =0; r<24; r++) {
@@ -35,6 +35,7 @@ void checkCollision() {
       falling.get(0).moveDown();
     }
 }
+
 void keyPressed() {
   if (keyCode == RIGHT) {
     moveRight();
