@@ -159,9 +159,6 @@ public class Piece {
         }
       }
     }
-    for (int l =0; l<4; l++){
-      grid[blocks[l].x][blocks[l].y].c = blocks[l].c;
-    }
   }
 
   public void rotate(boolean left) {
@@ -193,8 +190,8 @@ public class Piece {
   public void moveDown(){
     for (Block block : blocks){
       grid[block.y][block.x].c=color(255);
+      grid[block.y+1][block.x].c = block.c;  
       block.y+=1;
-      grid[block.y][block.x].c = block.c;
     }
   }
   

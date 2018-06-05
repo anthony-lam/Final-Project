@@ -9,15 +9,16 @@ void setup() {
   }
 }
 void draw() {
+  if (frameCount%4==0){
+  clear();
   add();
-  System.out.println("added");
   checkCollision();
-  moveDown();
   for (int r =0; r<24; r++) {
     for (int c = 0; c<10; c++) {
       fill(grid[r][c].c);
       rect(c*30, r*30, c*30+30, r*30+30);
     }
+  }
   }
 }
 void add() {
@@ -29,6 +30,9 @@ void add() {
 void checkCollision() {
     if (falling.get(0).checkCollisions()){
         falling.remove(0);
+    }
+    else{
+      falling.get(0).moveDown();
     }
 }
 void keyPressed() {
@@ -43,11 +47,6 @@ void keyPressed() {
   }
   if (key == 'd' ){
     rotate(false); //right
-  }
-}
-void moveDown() {
-  for (Piece current : falling) {
-    current.moveDown();
   }
 }
 void moveRight() {
