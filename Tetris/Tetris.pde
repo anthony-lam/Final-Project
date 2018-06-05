@@ -56,8 +56,9 @@ void checkFullRow() {
       }
       
       for (Block b : onBoard){
-        if (b.y < r){
-         grid[b.x][b.y+1].c = b.c;
+        if (b.x < r){
+         println(b.x);
+         grid[b.y][b.x+1].c = b.c;
          b.c = color(255);
         }
       }
