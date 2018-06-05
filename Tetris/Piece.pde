@@ -198,17 +198,44 @@ public class Piece {
   }
   
   public void moveLeft(){
+    if (canMoveLeft()){
     for (Block block : blocks){
-      block.c = color(255);
-      grid[block.x - 1][block.y].c = color(0);
+      grid[block.y][block.x].c=color(255);
+    }
+    for (Block block : blocks){
+      block.x-=1;
+      grid[block.y][block.x].c=block.c;
+    }
     }
   }
-  
-  
+  public boolean canMoveLeft(){
+    for (Block block:blocks){
+      if (block.x<=0){
+        return false;
+      }
+    }
+    return true;
+  }
+        
+  public boolean canMoveRight(){
+    for (Block block:blocks){
+      if (block.x>=9){
+        return false;
+      }
+    }
+    return true;
+  }
   public void moveRight(){
+    if (canMoveRight()){
     for (Block block : blocks){
-      block.c = color(255);
-      grid[block.x + 1][block.y].c = color(0);
+      grid[block.y][block.x].c=color(255);
+    }
+    for (Block block : blocks){
+      if (block.x<9){
+      block.x+=1;
+      grid[block.y][block.x].c=block.c;
+      }
+    }
     }
   }
 }
