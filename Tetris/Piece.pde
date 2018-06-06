@@ -147,6 +147,15 @@ public class Piece {
   public void rotate(boolean left) {
     if (canRotate(left)) {
       // falling.remove(this);
+      int x = corner[0];
+      int y = corner[1];
+      for (int r = 0; r < 4; r++) {
+        for (int c = 0; c < 4; c++) {
+          if (current[r][c] == 1){
+            grid[r+x][c+y].c = color(255);
+          }
+        }
+      }
       if (left) {
         rotation = (rotation + 3) % 4;
         current = Pieces[type][rotation];
@@ -155,16 +164,13 @@ public class Piece {
         current = Pieces[type][rotation];
       }
       int i = 0;
-      int x = corner[0];
-      int y = corner[1];
       for (int r = 0; r < 4; r++) {
         for (int c = 0; c < 4; c++) {
-          if (current[r][c] == 0) {
-            grid[r + x][c + y].c = color(255);
-          } else {
+          if (current[r][c] == 1) {
             blocks[i] = new Block(r + x, c + y, colors[type]);
             i += 1;
             grid[r + x][c + y].c = colors[type];
+          } else {
           }
         }
       }
@@ -188,8 +194,8 @@ public class Piece {
     for (int r = 0; r < 4; r++) {
       for (int c = 0; c < 4; c++) {
         if (temp[r][c] == 1 && current[r][c] != 1 && grid[r + corner[0]][c + corner[1]].c != color(255)) {
-   //       println(r);
-   //       println(c);
+          //       println(r);
+          //       println(c);
           return false;
         }
       }

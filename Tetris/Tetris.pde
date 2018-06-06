@@ -11,6 +11,7 @@ void setup() {
 }
 void draw() {
   if (frameCount%10==0) {
+    checkFullRow();
     add();
     checkCollision();
     for (int r =0; r<24; r++) {
@@ -20,7 +21,6 @@ void draw() {
       }
     }
   }
-  checkFullRow();
 }
 void add() {
   if (falling.size()==0) {
