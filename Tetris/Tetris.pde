@@ -38,6 +38,7 @@ void checkCollision() {
 
 
 void checkFullRow() {
+  if (falling.size()==0){
   for (int r = 23; r > -1; r--) {
     boolean full = true;
     for (int c = 0; c < grid[0].length; c++) {
@@ -58,6 +59,7 @@ void checkFullRow() {
         }
       }
     }
+  }
   }
 }
 
