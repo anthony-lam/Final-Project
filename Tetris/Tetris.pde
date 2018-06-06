@@ -1,5 +1,6 @@
 import java.util.*;
 Block[][] grid = new Block[24][10];
+String state = "Play";
 ArrayList<Piece> falling = new ArrayList<Piece>();
 void setup() {
   size(300, 720);
@@ -10,7 +11,18 @@ void setup() {
   }
 }
 void draw() {
-  if (frameCount%10==0) {
+  switch (state){
+   case "Menu":
+   
+   case "Play":
+     play();
+     break;
+   
+  }
+}
+
+void play(){
+ if (frameCount%10==0) {
     checkFullRow();
     add();
     checkCollision();
@@ -20,8 +32,9 @@ void draw() {
         rect(c*30, r*30, c*30+30, r*30+30);
       }
     }
-  }
+  } 
 }
+
 void add() {
   if (falling.size()==0) {
     falling.add(new Piece());
