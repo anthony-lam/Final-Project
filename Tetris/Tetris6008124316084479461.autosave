@@ -1,44 +1,23 @@
 import java.util.*;
 Block[][] grid = new Block[24][10];
-String state;
-Button play;
-Button replay;
+String state = "Play";
 ArrayList<Piece> falling = new ArrayList<Piece>();
 void setup() {
-  size(250, 600);
-  state = "Menu";
-  play = new Button(width/2,height/2,100,50, "Play");
-  play.add();
-}
-void draw() {
-  switch (state){
-   case "Menu":
-     break;
-   case "Play":
-     play();
-     break;
-   case "Over":
-     replay = new Button(width/2, 100, 100, 50, "Replay");
-     replay.add();
-     break;
-  }
-}
-void mouseClicked(){
-  if (play.over()){
-   state = "Play"; 
-   setPlay();
-  }
-  if (replay.over()){
-   state = "Play";
-   setPlay();
-  }
-}
-
-void setPlay(){
+  size(300, 720);
   for (int r =0; r<24; r++) {
     for (int c = 0; c<10; c++) {
       grid[r][c]= new Block(r, c, color(255));
     }
+  }
+}
+void draw() {
+  switch (state){
+   case "Menu":
+     
+   case "Play":
+     play();
+     break;
+   
   }
 }
 
@@ -50,7 +29,7 @@ void play(){
     for (int r =0; r<24; r++) {
       for (int c = 0; c<10; c++) {
         fill(grid[r][c].c);
-        rect(c*25, r*25, c*25+25, r*25+25);
+        rect(c*30, r*30, c*30+30, r*30+30);
       }
     }
   } 
