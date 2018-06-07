@@ -29,37 +29,39 @@ void add() {
 }
 
 void checkCollision() {
-  if (falling.get(0).checkCollisions()) {
-    falling.remove(0);
-  } else {
-    falling.get(0).moveDown();
+  if (falling.size()==1) {
+    if (falling.get(0).checkCollisions()) {
+      falling.remove(0);
+    } else {
+      falling.get(0).moveDown();
+    }
   }
 }
 
 
 void checkFullRow() {
-  if (falling.size()==0){
-  for (int r = 23; r > -1; r--) {
-    boolean full = true;
-    for (int c = 0; c < grid[0].length; c++) {
-      if (grid[r][c].c == color(255)) {
-        full = false;
-        c = grid[0].length; //**im not sure if break is allowed
+  if (falling.size()==0) {
+    for (int r = 23; r > -1; r--) {
+      boolean full = true;
+      for (int c = 0; c < grid[0].length; c++) {
+        if (grid[r][c].c == color(255)) {
+          full = false;
+          c = grid[0].length; //**im not sure if break is allowed
+        }
       }
-    }
-    if (full) {
-      for (Block b : grid[r]) {
-        b.c = color(255);
-      }
-
-      for (int i = r - 1; i > 0; i--) {
-        for (Block b : grid[i]) {
-          grid[b.x+1][b.y].c = b.c;
+      if (full) {
+        for (Block b : grid[r]) {
           b.c = color(255);
+        }
+
+        for (int i = r - 1; i > 0; i--) {
+          for (Block b : grid[i]) {
+            grid[b.x+1][b.y].c = b.c;
+            b.c = color(255);
+          }
         }
       }
     }
-  }
   }
 }
 
@@ -69,6 +71,9 @@ void keyPressed() {
   }
   if (keyCode == LEFT) {
     moveLeft();
+  }
+  if (key == ' ') {
+    checkCollision();
   }
   if (key == 'q' ) {
     rotate(true); //left
