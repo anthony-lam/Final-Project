@@ -179,11 +179,7 @@ public class Piece {
 
 
 
-  public boolean canRotate(boolean left) {
-    boolean ok = corner[0] >= 0 && corner[0] + 4 < 24 && corner[1] >= 0 && corner[1] + 4  < 10;
-    if (!ok) {
-      return false;
-    }
+ public boolean canRotate(boolean left) {
     int newR;
     if (left) {
       newR = (rotation + 3) % 4;
@@ -193,16 +189,16 @@ public class Piece {
     int[][] temp = Pieces[type][newR];
     for (int r = 0; r < 4; r++) {
       for (int c = 0; c < 4; c++) {
-        if (temp[r][c] == 1 && current[r][c] != 1 && grid[r + corner[0]][c + corner[1]].c != color(255)) {
-          //       println(r);
-          //       println(c);
-          return false;
+        if (temp[r][c]==1) {
+          if (r+corner[0]<0||r+corner[0]>23||c+corner[1]<0||c+corner[1]>9||(grid[r + corner[0]][c + corner[1]].c != color(255)&&current[r][c]!=1)) {
+            return false;
+          }
         }
       }
     }
+//    System.out.println(true);
     return true;
   }
-
   public boolean checkCollisions() {
     int[] cols ={-1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
     for (int i=0; i<4; i++) {
