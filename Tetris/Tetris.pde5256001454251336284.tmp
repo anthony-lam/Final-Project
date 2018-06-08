@@ -9,11 +9,6 @@ Button menu;
 ArrayList<Piece> falling = new ArrayList<Piece>();
 void setup() {
   size(250, 600);
-  play = new Button(width/2, 200, 100, 50, "Play");
-  back = new Button(width/2, 500, 100, 50, "Menu");
-  replay = new Button(width/2, 100, 100, 50, "Replay");
-  controls = new Button(width/2, 300, 100, 50, "Controls");
-  menu = new Button(width/2, 200, 100, 50, "Menu");
   state = "Menu";
   setMenu();
 }
@@ -35,37 +30,30 @@ void mouseClicked() {
   if (play.over() && play.active()) {
     state = "Play"; 
     setPlay();
-    play.deactivate();
-    controls.deactivate();
-  } 
-  if (controls.over() && controls.active()) {
+  }
+  else if (controls.over() && controls.active()) {
     state = "Controls";
     setControls();
-    controls.deactivate();
-    play.deactivate();
-  } 
-  if (back.over() && back.active()) {
-    state = "Menu";
-    setMenu();
-    back.deactivate();
-  } 
-  if (replay.over() && replay.active()) {
+  }
+  else if (back.over() && back.active()){
+   state = "Menu";
+   setMenu();
+  }
+  else if (replay.over() && replay.active()) {
     state = "Play";
     setPlay();
-    replay.deactivate();
-    menu.deactivate();
-  } 
-  if (menu.over() && menu.active()) {
+  }
+  else if (menu.over() && menu.active()){
     state = "Menu";
     setMenu();
-    menu.deactivate();
-    replay.deactivate();
   }
 }
 
 void setMenu() {
   background(255);
+  play = new Button(width/2, 200, 100, 50, "Play");
   play.add();
+  controls = new Button(width/2, 300, 100, 50, "Controls");
   controls.add();
 }
 void setPlay() {
@@ -77,10 +65,13 @@ void setPlay() {
 }
 void setControls() {
   background(255);
+  back = new Button(width/2, 500, 100, 50, "Menu");
   back.add();
 }
 void setOver() {
+  replay = new Button(width/2, 100, 100, 50, "Replay");
   replay.add();
+  menu = new Button(width/2, 200, 100, 50, "Menu");
   menu.add();
 }
 
@@ -105,12 +96,10 @@ void add() {
 }
 
 void checkCollision() {
-  if (falling.size()==1) {
-    if (falling.get(0).checkCollisions()) {
-      falling.remove(0);
-    } else {
-      falling.get(0).moveDown();
-    }
+  if (falling.get(0).checkCollisions()) {
+    falling.remove(0);
+  } else {
+    falling.get(0).moveDown();
   }
 }
 
@@ -147,9 +136,6 @@ void keyPressed() {
   }
   if (keyCode == LEFT) {
     moveLeft();
-  }
-  if (key == ' ') {
-    checkCollision();
   }
   if (key == 'q' ) {
     rotate(true); //left
