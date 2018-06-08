@@ -153,10 +153,10 @@ void keyPressed() {
   if (key == ' ') {
     checkCollision();
   }
-  if (key == 'q' ) {
+  if (keyCode == UP ) {
     rotate(true); //left
   }
-  if (key == 'e' ) {
+  if (keyCode == DOWN ) {
     rotate(false); //right
   }
 }
