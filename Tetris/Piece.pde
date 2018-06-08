@@ -196,7 +196,7 @@ public class Piece {
         }
       }
     }
-    System.out.println(true);
+//    System.out.println(true);
     return true;
   }
   public boolean checkCollisions() {

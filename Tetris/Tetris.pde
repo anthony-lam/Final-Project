@@ -64,7 +64,8 @@ void mouseClicked() {
 }
 
 void setMenu() {
-  background(255);
+  PImage bg = loadImage("TetrisMenuBG.jpg");
+  background(bg);
   play.add();
   controls.add();
 }
@@ -76,7 +77,8 @@ void setPlay() {
   }
 }
 void setControls() {
-  background(255);
+  PImage bg = loadImage("TetrisControlsBG.jpg");
+  background(bg);
   back.add();
 }
 void setOver() {
