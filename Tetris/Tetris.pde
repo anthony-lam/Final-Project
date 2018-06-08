@@ -17,6 +17,7 @@ void draw() {
     for (int r =0; r<24; r++) {
       for (int c = 0; c<10; c++) {
         fill(grid[r][c].c);
+        noStroke();
         rect(c*30, r*30, c*30+30, r*30+30);
       }
     }
