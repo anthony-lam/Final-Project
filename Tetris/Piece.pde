@@ -135,7 +135,7 @@ public class Piece {
     blocks = new Block[4];
     int i = 0;
     corner[1]=fits();
-    System.out.println(corner[1]);
+ //   System.out.println(corner[1]);
     if (corner[1]!=-1) {
       for (int r = 0; r < 4; r++) {
         for (int c = 0; c < 4; c++) {
