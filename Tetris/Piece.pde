@@ -131,31 +131,31 @@ public class Piece {
   public Piece() {
     rotation = (int)(Math.random()*4);
     type = (int)(Math.random()*7);
-    System.out.println(type);
     current = Pieces[type][rotation];
     blocks = new Block[4];
     int i = 0;
     corner[1]=fits();
     System.out.println(corner[1]);
-    if (corner[1]==-1){
-      state="Over";
-      return ;
-    }
-    for (int r = 0; r < 4; r++) {
-      for (int c = 0; c < 4; c++) {
-        if (current[r][c] == 1) {
-          blocks[i] = new Block(r, c+corner[1], colors[type]);
-          i++;
+    if (corner[1]!=-1) {
+      for (int r = 0; r < 4; r++) {
+        for (int c = 0; c < 4; c++) {
+          if (current[r][c] == 1) {
+            blocks[i] = new Block(r, c+corner[1], colors[type]);
+            i++;
+          }
         }
       }
+    } else {
+      state = "Over";
+      falling.remove(this);
     }
   }
   public int fits() {
-    for (int i =0; i<8; i++) {
+    for (int i =0; i<7; i++) {
       boolean fit = true;
       for (int r = 0; r < 4; r++) {
         for (int c = 0; c < 4; c++) {
-          if (current[r][c] == 1 && c+i>9 && grid[r][c+i].c!=color(255)) {
+          if (current[r][c] == 1 && (c+i>9||grid[r][c+i].c!=color(255))) {
             fit = false;
           }
         }
@@ -225,6 +225,9 @@ public class Piece {
   public boolean checkCollisions() {
     int[] cols ={-1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
     for (int i=0; i<4; i++) {
+      if (blocks[0]==null){
+        return true;
+      }
       int x =blocks[i].x;
       //   println(x);
       int y =blocks[i].y;
