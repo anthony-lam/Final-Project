@@ -106,7 +106,11 @@ void add() {
     falling.add(new Piece());
   }
 }
-
+void space(){
+  while (falling.size()==1){
+    checkCollision();
+  }
+}
 void checkCollision() {
   if (falling.size()==1) {
     if (falling.get(0).checkCollisions()) {
@@ -152,7 +156,7 @@ void keyPressed() {
     moveLeft();
   }
   if (key == ' ') {
-    checkCollision();
+    space();
   }
   if (keyCode == UP ) {
     rotate(true); //left
