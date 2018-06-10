@@ -131,17 +131,40 @@ public class Piece {
   public Piece() {
     rotation = (int)(Math.random()*4);
     type = (int)(Math.random()*7);
+    System.out.println(type);
     current = Pieces[type][rotation];
     blocks = new Block[4];
     int i = 0;
+    corner[1]=fits();
+    System.out.println(corner[1]);
+    if (corner[1]==-1){
+      state="Over";
+      return ;
+    }
     for (int r = 0; r < 4; r++) {
       for (int c = 0; c < 4; c++) {
         if (current[r][c] == 1) {
-          blocks[i] = new Block(r, c, colors[type]);
+          blocks[i] = new Block(r, c+corner[1], colors[type]);
           i++;
         }
       }
     }
+  }
+  public int fits() {
+    for (int i =0; i<8; i++) {
+      boolean fit = true;
+      for (int r = 0; r < 4; r++) {
+        for (int c = 0; c < 4; c++) {
+          if (current[r][c] == 1 && c+i>9 && grid[r][c+i].c!=color(255)) {
+            fit = false;
+          }
+        }
+      }
+      if (fit) {
+        return i;
+      }
+    }
+    return -1;
   }
 
   public void rotate(boolean left) {
@@ -151,7 +174,7 @@ public class Piece {
       int y = corner[1];
       for (int r = 0; r < 4; r++) {
         for (int c = 0; c < 4; c++) {
-          if (current[r][c] == 1){
+          if (current[r][c] == 1) {
             grid[r+x][c+y].c = color(255);
           }
         }
@@ -179,7 +202,7 @@ public class Piece {
 
 
 
- public boolean canRotate(boolean left) {
+  public boolean canRotate(boolean left) {
     int newR;
     if (left) {
       newR = (rotation + 3) % 4;
@@ -196,7 +219,7 @@ public class Piece {
         }
       }
     }
-//    System.out.println(true);
+    //    System.out.println(true);
     return true;
   }
   public boolean checkCollisions() {

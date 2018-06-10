@@ -76,7 +76,7 @@ void setPlay() {
     }
   }
 }
-void setControls() {
+void setControls(){
   PImage bg = loadImage("TetrisControlsBG.jpg");
   background(bg);
   back.add();
@@ -86,7 +86,7 @@ void setOver() {
   menu.add();
 }
 
-void play() {
+void play(){
   if (frameCount%10==0) {
     checkFullRow();
     add();
